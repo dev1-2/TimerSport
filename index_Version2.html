@@ -1,0 +1,145 @@
+<! DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown bis 07.07.2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background:  linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem 1.5rem;
+            min-width: 120px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .time-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .time-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .time-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .time-box {
+                min-width: 100px;
+                padding: 1.5rem 1rem;
+            }
+
+            .time-number {
+                font-size: 2.5rem;
+            }
+
+            .countdown {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Noch bis zum 07.07.2026</h1>
+        <div class="countdown">
+            <div class="time-box">
+                <span class="time-number" id="days">0</span>
+                <span class="time-label">Tage</span>
+            </div>
+            <div class="time-box">
+                <span class="time-number" id="hours">0</span>
+                <span class="time-label">Stunden</span>
+            </div>
+            <div class="time-box">
+                <span class="time-number" id="minutes">0</span>
+                <span class="time-label">Minuten</span>
+            </div>
+            <div class="time-box">
+                <span class="time-number" id="seconds">0</span>
+                <span class="time-label">Sekunden</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date('2026-07-07T00:00:00').getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days;
+                document. getElementById('hours').textContent = hours. toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                document.getElementById('days').textContent = '0';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+        }
+
+        // Update sofort beim Laden
+        updateCountdown();
+        
+        // Update jede Sekunde
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
